@@ -12,7 +12,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY
   ${CMAKE_BINARY_DIR}/bin)
 
 if (NOT OPEN_WBO_SOLVER)
-  message(FATAL_ERROR "please specify OPEN_WBO_SOLVER")
+  message(STATUS "OPEN_WBO_SOLVER not specified, defaulting to glucose3.0")
+  set(OPEN_WBO_SOLVER "glucose3.0")
 endif(NOT OPEN_WBO_SOLVER)
 
 if (${OPEN_WBO_SOLVER} STREQUAL "minisat2.0")
@@ -67,7 +68,18 @@ elseif (${OPEN_WBO_SOLVER} STREQUAL "glucored")
   set(NSPACE "Minisat")
   add_definitions(-DGLUCORED)
 else (${OPEN_WBO_SOLVER} STREQUAL "minisat2.0")
-  message(FATAL_ERROR "unrecognized solver name \"${OPEN_WBO_SOLVER}\"")
+  message(FATAL_ERROR "Unrecognized solver name OPEN_WBO_SOLVER=\"${OPEN_WBO_SOLVER}\".\n \
+Must be one of:\n \
+* minisat2.0\n \
+* minisat2.2\n \
+* glucose3.0\n \
+* glucose2.3\n \
+* zenn\n \
+* sinn\n \
+* gluminisat\n \
+* gluh\n \
+* glue_bit\n \
+* glucored")
 endif (${OPEN_WBO_SOLVER} STREQUAL "minisat2.0")
 
 set(SOLVER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/solvers/${REL_SOLVER_DIR})
