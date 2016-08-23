@@ -86,7 +86,9 @@ set(SOLVER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/solvers/${REL_SOLVER_DIR})
 
 add_definitions(-DVERSION=${VERSION} -DSOLVERNAME=${SOLVERNAME} -DNSPACE=${NSPACE})
 
+if(NOT MSVC)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-logical-op-parentheses -Wno-dangling-else")
+endif(NOT MSVC)
 
 file(
   GLOB
